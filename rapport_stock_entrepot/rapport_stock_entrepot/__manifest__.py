@@ -1,0 +1,20 @@
+{
+    "name": "Rapport de Stock par Entrepôt - PDF",
+    "version": "18.0.2.0.0",
+    "category": "Inventory",
+    "summary": "Générer, imprimer et envoyer automatiquement un rapport de stock par entrepôt (PDF + Email)",
+    "author": "Fabrice Sangwa",
+    "license": "LGPL-3",
+    "depends": ["stock", "mail"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/stock_warehouse_report_views.xml",
+        "views/menu.xml",
+        "report/stock_report_templates.xml",
+        "report/stock_report_actions.xml",
+        "data/mail_template.xml",
+        "data/cron.xml",
+    ],
+    "installable": True,
+    "application": True,
+}

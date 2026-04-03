@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- Extension du ProductCard POS -->
+    <t t-name="fs_pos_bloquer_vente_decouvert.ProductCardExt"
+       t-inherit="point_of_sale.ProductCard"
+       t-inherit-mode="extension">
+
+        <!-- 1) Ajouter une classe si produit bloqué -->
+        <xpath expr="//article" position="attributes">
+            <attribute name="t-att-class">
+                (props.product && props.product.fs_blocked) ? 'fs-product-blocked' : ''
+            </attribute>
+        </xpath>
+
+        <!-- 2) Badge stock (visible seulement si blocage activé) -->
+        <xpath expr="//div[hasclass('product-information-tag')]" position="before">
+            <t t-if="props.product && props.product.fs_show_stock_badge">
+                <div class="fs-stock-badge"
+                     t-att-class="(props.product.fs_available_qty > 0) ? 'fs-stock-ok' : 'fs-stock-zero'">
+                    <span class="fs-stock-label">Stock :</span>
+                    <span class="fs-stock-value" t-esc="props.product.fs_available_qty"/>
+                </div>
+            </t>
+        </xpath>
+
+        <!-- 3) Petit overlay 'Bloqué' -->
+        <xpath expr="//article" position="inside">
+            <t t-if="props.product && props.product.fs_blocked">
+                <div class="fs-block-overlay">
+                    <span>Indisponible</span>
+                </div>
+            </t>
+        </xpath>
+
+    </t>
+</templates>

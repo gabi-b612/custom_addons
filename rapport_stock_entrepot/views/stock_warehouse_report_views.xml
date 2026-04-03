@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- SEARCH -->
+    <record id="view_stock_warehouse_report_search" model="ir.ui.view">
+        <field name="name">stock.warehouse.report.search</field>
+        <field name="model">stock.warehouse.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="warehouse_id"/>
+                <field name="schedule_enabled"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="action_stock_warehouse_report" model="ir.actions.act_window">
+        <field name="name">Rapports Stock (Entrepôt)</field>
+        <field name="res_model">stock.warehouse.report</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- LIST -->
+    <record id="view_stock_warehouse_report_list" model="ir.ui.view">
+        <field name="name">stock.warehouse.report.list</field>
+        <field name="model">stock.warehouse.report</field>
+        <field name="arch" type="xml">
+            <list string="Rapports Stock (Entrepôt)" default_order="date_report desc">
+                <field name="name"/>
+                <field name="warehouse_id"/>
+                <field name="date_report"/>
+                <field name="schedule_enabled"/>
+                <field name="last_sent_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM -->
+    <record id="view_stock_warehouse_report_form" model="ir.ui.view">
+        <field name="name">stock.warehouse.report.form</field>
+        <field name="model">stock.warehouse.report</field>
+        <field name="arch" type="xml">
+            <form string="Rapport Stock (Entrepôt)">
+                <header>
+                    <button name="action_print_pdf"
+                            type="object"
+                            string="Imprimer PDF"
+                            class="btn-primary"/>
+
+                    <!-- Odoo 18 : pas de attrs, on masque via invisible -->
+                    <button name="action_send_email_now"
+                            type="object"
+                            string="Envoyer maintenant"
+                            class="btn-secondary"
+                            invisible="not email_to"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="warehouse_id"/>
+                        <field name="date_report" readonly="1"/>
+                    </group>
+
+                    <separator string="Envoi automatique par email"/>
+
+                    <group>
+                        <field name="schedule_enabled"/>
+
+                        <!-- Masqué si planification désactivée -->
+                        <group invisible="not schedule_enabled">
+                            <group>
+                                <field name="schedule_hour"/>
+                                <field name="schedule_minute"/>
+                            </group>
+
+                            <field name="email_to" placeholder="a@x.com, b@y.com"/>
+                            <field name="email_subject"/>
+                            <field name="email_body" widget="html"/>
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                            <field name="last_sent_date" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

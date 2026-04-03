@@ -1,0 +1,16 @@
+<odoo>
+    <menuitem
+        id="menu_rapport_stock_root"
+        name="Rapports de stock"
+        parent="stock.menu_stock_root"
+        sequence="90"
+    />
+
+    <menuitem
+        id="menu_rapport_stock_entrepot"
+        name="Rapport Stock (Entrepôt)"
+        parent="menu_rapport_stock_root"
+        action="action_stock_warehouse_report"
+        sequence="10"
+    />
+</odoo>

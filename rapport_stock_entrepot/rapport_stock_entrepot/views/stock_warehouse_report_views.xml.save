@@ -1,0 +1,71 @@
+ame="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créez un rapport de stock par entrepôt, générez les lignes puis imprimez le PDF.
+            </p>
+        </field>
+    </record>
+
+    <!-- TREE -->
+    <record id="view_stock_warehouse_report_tree" model="ir.ui.view">
+        <field name="name">stock.warehouse.report.tree</field>
+        <field name="model">stock.warehouse.report</field>
+        <field name="arch" type="xml">
+            <tree string="Rapports Stock (Entrepôt)" default_order="report_datetime desc">
+                <field name="name"/>
+                <field name="warehouse_id"/>
+                <field name="report_datetime"/>
+                <field name="user_id"/>
+                <field name="state"/>
+                <field name="line_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM -->
+    <record id="view_stock_warehouse_report_form" model="ir.ui.view">
+        <field name="name">stock.warehouse.report.form</field>
+        <field name="model">stock.warehouse.report</field>
+        <field name="arch" type="xml">
+            <form string="Rapport Stock (Entrepôt)">
+                <header>
+                    <button name="action_generate_lines"
+                            type="object"
+                            string="Générer"
+                            class="btn-primary"
+                            attrs="{'invisible':[('warehouse_id','=',False)]}"/>
+
+                    <button name="action_print_pdf"
+                            type="object"
+                            string="Imprimer PDF"
+                            class="btn-secondary"
+                            attrs="{'invisible':[('line_count','=',0)]}"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,generated"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="warehouse_id" required="1"/>
+                        <field name="report_datetime"/>
+                        <field name="user_id" readonly="1"/>
+                        <field name="line_count" readonly="1"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Lignes">
+                            <field name="line_ids" nolabel="1">
+                                <tree>
+                                    <field name="product_id"/>
+                                    <field name="qty_available"/>
+                                    <field name="status"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

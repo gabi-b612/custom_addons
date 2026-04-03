@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.pos.product.stock</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='restaurant_section']" position="after">
+                <block title="Stock Display" id="stock_display_section">
+                    <setting string="Display Stock" help="Display stock quantity in POS">
+                        <field name="display_stock"/>
+                    </setting>
+                    <setting string="Stock Type" invisible="display_stock != True"
+                             help="Select the type of stock to display in POS"
+                             required="display_stock == True">
+                        <field name="stock_type"/>
+                    </setting>
+                    <setting string="Stock Location" invisible="display_stock != True"
+                             help="Choose the source of stock quantities">
+                        <field name="stock_from" widget="radio"/>
+                    </setting>
+                    <setting string="Stock Location" invisible="stock_from != 'current_warehouse'"
+                             help="Select the stock location for POS">
+                        <field name="stock_location_id"
+                               domain="[('usage', '=', 'internal'), ('location_id.usage', '!=', 'internal')]"/>
+                    </setting>
+                    <setting string="Show Negative Quantity Products"
+                             help="Enable to display products with negative quantities in the POS interface"
+                             invisible="display_stock != True">
+                        <field name="show_negative_qty_products" readonly="allow_negative_products_to_order == True"/>
+                    </setting>
+                    <setting string="Disable Negative Quantity Products"
+                             help="Enable to disable products with negative or zero quantities from being selected in the POS"
+                             invisible="display_stock != True">
+                        <field name="disable_negative_qty_product" readonly="allow_negative_products_to_order == True"/>
+                    </setting>
+                    <setting string="Allow Negative Products to Order"
+                             help="Enable to allow adding products with negative quantities to the order in the POS"
+                             invisible="display_stock != True">
+                        <field name="allow_negative_products_to_order"/>
+                    </setting>
+                    <setting string="Show Product Trend"
+                             help="Enable to display a trend indicator for product stock based on sales and stock movements from the last month"
+                             invisible="display_stock != True">
+                        <field name="show_product_trend"/>
+                    </setting>
+                    <setting string="Threshold Quantity" invisible="display_stock != True"
+                             help="Set the minimum stock quantity below which a warning will be shown in the POS">
+                        <field name="threshold_qty"/>
+                    </setting>
+                    <setting string="Threshold Warning Message" invisible="display_stock != True"
+                             help="Custom message to display when a product's stock is below the threshold quantity">
+                        <field name="threshold_message" widget="text"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

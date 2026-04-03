@@ -1,0 +1,207 @@
+.product-stock-info {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Increased space between elements for better separation */
+    margin-bottom: 5px; /* More space from other elements */
+    font-size: 14px; /* Slightly smaller font for a sleek look */
+    font-family: "Roboto", sans-serif; /* Modern font */
+}
+
+/* Stock Quantity Badge */
+.stock-quantity-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    border-radius: 12px; /* Rounded badge-like appearance */
+    font-weight: 600;
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.stock-quantity-label {
+    color: #555; /* Subtle gray for the label */
+    font-weight: 500;
+}
+
+.stock-quantity-value {
+    font-weight: 700;
+}
+
+.stock-available {
+    background: linear-gradient(135deg, #66ff99, #99ffcc); /* Lighter green gradient */
+    color: #1a3c34; /* Darker text for contrast */
+}
+
+.stock-available:hover {
+    background: linear-gradient(135deg, #99ffcc, #66ff99); /* Reverse lighter green gradient on hover */
+    transform: scale(1.05); /* Slight scale-up on hover */
+}
+
+.stock-unavailable {
+    background: linear-gradient(135deg, #ff9999, #ffcccc); /* Lighter red gradient */
+    color: #5c2526; /* Darker text for contrast */
+}
+
+.stock-unavailable:hover {
+    background: linear-gradient(135deg, #ffcccc, #ff9999); /* Reverse lighter red gradient on hover */
+    transform: scale(1.05); /* Slight scale-up on hover */
+}
+
+/* Stock Trend Container */
+.stock-trend-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* Center horizontally */
+    width: 24px; /* Fixed width */
+    height: 24px; /* Fixed height */
+    border-radius: 50%; /* Circular container */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Stock Trend Icon */
+.stock-trend-icon {
+    display: flex; /* Use flex to center the pseudo-element content */
+    align-items: center; /* Vertically center */
+    justify-content: center; /* Horizontally center */
+    width: 100%; /* Take full width of container */
+    height: 100%; /* Take full height of container */
+    font-size: 16px; /* Adjusted size for better proportionality */
+    animation: pulse 1.5s infinite; /* Pulsing animation */
+}
+
+/* Trend Styles */
+.trend-up {
+    background: rgba(102, 255, 153, 0.2); /* Lighter green background */
+}
+
+.trend-up .stock-trend-icon::before {
+    content: "\25B2"; /* Up arrowhead (triangle) */
+    color: #1a5e2a; /* Darker green for increasing trend */
+}
+
+.trend-down {
+    background: rgba(255, 153, 153, 0.2); /* Lighter red background */
+}
+
+.trend-down .stock-trend-icon::before {
+    content: "\25BC"; /* Down arrowhead (triangle) */
+    color: #8b1a1a; /* Darker red for decreasing trend */
+}
+
+.trend-neutral {
+    background: rgba(200, 200, 200, 0.2); /* Light gray background for neutral */
+}
+
+.trend-neutral .stock-trend-icon::before {
+    content: "\25CF"; /* Circle for neutral trend */
+    color: #555; /* Gray for neutral trend */
+}
+
+/* Tooltip for Stock Trend */
+.stock-trend-tooltip {
+    visibility: hidden;
+    position: absolute;
+    top: -60px; /* Adjusted to accommodate more content */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333; /* Dark background for the tooltip */
+    color: #fff; /* White text */
+    padding: 10px 15px; /* Increased padding */
+    border-radius: 6px; /* Slightly larger border radius */
+    font-size: 12px;
+    z-index: 1000; /* High z-index to overlap other products */
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    min-width: 150px; /* Enough width for content */
+    text-align: left; /* Align text to the left */
+}
+
+.stock-trend-tooltip .tooltip-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Space between rows */
+}
+
+.stock-trend-tooltip .tooltip-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px; /* Gap between label and value */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.stock-trend-tooltip .tooltip-label {
+    font-weight: 500;
+    color: #ddd; /* Lighter gray for the label */
+}
+
+.stock-trend-tooltip .tooltip-value {
+    font-weight: 700;
+    color: #fff; /* White for the value */
+}
+
+.stock-trend-container:hover .stock-trend-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.stock-trend-container:hover {
+    transform: scale(1.2); /* Slight scale-up on hover */
+}
+
+/* Animation for the Trend Icon */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Disabled Product Style */
+.product-disabled {
+    opacity: 0.3; /* Reduce opacity to indicate disabled state */
+    pointer-events: none; /* Prevent clicks */
+    cursor: not-allowed; /* Show a "not allowed" cursor */
+}
+
+
+.product-stock-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-family: "Roboto", sans-serif;
+}
+
+.threshold-info {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffeb99, #fff3cc); /* Light yellow gradient */
+    color: #5c4033; /* Darker text for contrast */
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.threshold-label {
+    color: #555;
+    font-weight: 500;
+}
+
+.threshold-value {
+    font-weight: 700;
+}
+
+/* Existing styles remain unchanged */

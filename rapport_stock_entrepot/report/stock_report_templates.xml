@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="stock_report_pdf">
+        <t t-call="web.external_layout">
+            <main>
+                <div class="page">
+
+                    <h2 t-esc="report_title"/>
+
+                    <p>
+                        <strong>Entrepôt :</strong>
+                        <span t-esc="warehouse_name"/><br/>
+
+                        <strong>Date du rapport :</strong>
+                        <span t-esc="report_datetime"/><br/>
+
+                        <strong>Date &amp; heure d'impression :</strong>
+                        <span t-esc="print_datetime"/><br/>
+
+                        <strong>Imprimé par :</strong>
+                        <span t-esc="printed_by"/>
+                    </p>
+
+                    <table class="table table-sm o_main_table">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px;">N°</th>
+                                <th>Article</th>
+                                <th class="text-end" style="width: 140px;">Qté</th>
+                                <th style="width: 140px;">État</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="idx" t-value="0"/>
+                            <t t-foreach="lines or []" t-as="l">
+                                <t t-set="idx" t-value="idx + 1"/>
+
+                                <tr t-att-style="'font-weight:bold;' if (l.get('status') in ('Rupture','Négatif')) else ''">
+                                    <td t-esc="idx"/>
+                                    <td t-esc="(l.get('product') and l.get('product').display_name) or ''"/>
+                                    <td class="text-end" t-esc="l.get('qty', 0.0)"/>
+                                    <td t-esc="l.get('status') or ''"/>
+                                </tr>
+                            </t>
+
+                            <t t-if="not (lines or [])">
+                                <tr>
+                                    <td colspan="4" class="text-center">
+                                        Aucun article trouvé.
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <div style="margin-top: 40px;">
+                        <p><strong>Signature :</strong> <span t-esc="printed_by"/></p>
+                        <div style="height: 60px; border-bottom: 1px solid #000;"></div>
+                    </div>
+
+                </div>
+            </main>
+        </t>
+    </template>
+
+</odoo>

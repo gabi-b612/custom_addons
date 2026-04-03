@@ -1,0 +1,61 @@
+/* ===============================
+   PRODUIT BLOQUÉ (gris)
+================================= */
+
+.fs-product-blocked {
+    opacity: 0.45 !important;
+    pointer-events: none !important;
+    filter: grayscale(100%);
+    position: relative;
+}
+
+/* ===============================
+   OVERLAY "INDISPONIBLE"
+================================= */
+
+.fs-block-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    z-index: 5;
+}
+
+/* ===============================
+   BADGE STOCK
+================================= */
+
+.fs-stock-badge {
+    padding: 3px 6px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: inline-block;
+}
+
+.fs-stock-ok {
+    background-color: #e6f4ea;
+    color: #1e7e34;
+    border: 1px solid #c3e6cb;
+}
+
+.fs-stock-zero {
+    background-color: #fdecea;
+    color: #b02a37;
+    border: 1px solid #f5c2c7;
+}
+
+.fs-stock-label {
+    margin-right: 4px;
+}
